@@ -771,7 +771,7 @@ body::after{background:linear-gradient(115deg,transparent 0 22%,#4ecb8412 22% 34
 <label class="cc" id="tgBox" hidden><svg class="ic " viewBox="0 0 24 24"><path d="m12 3 2.700 5.700 6.300.8-4.600 4.300 1.200 6.200L12 17l-5.600 3 1.200-6.200L3 9.500l6.300-.8z" stroke-linejoin="round"/></svg><span class="ct"><small>Загаданное число</small><input id="target" type="number" value="50"></span></label>
 <label class="cc k3"><svg class="ic gold" viewBox="0 0 24 24"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v4M8 20h8"/></svg><span class="ct"><small>Победителей</small><input id="winCount" type="number" min="1" max="20" value="1"></span></label>
 <label class="cc k4"><svg class="ic " viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="ct"><small>Время, мин</small><input id="duration" type="number" min="1" max="180" value="5"></span><span class="pm"><button type="button" id="minus">−</button><button type="button" id="plus">+</button></span></label>
-<div class="cc lf" id="liveFeed"><div class="lh"><i></i>Лента · последние 5</div><ul></ul></div>
+<div class="cc lf" id="liveFeed"><div class="lh"><i></i>Лента · последние 3</div><ul></ul></div>
 </div>
 <div class="bd">
 <div class="pn"><div class="ph2"><svg class="ic " viewBox="0 0 24 24"><path d="M5 20V11M12 20V4M19 20v-6" stroke-width="3.2"/></svg><span>Добыча · общий вывод</span><button class="cb" onclick="show('history')" title="История и статистика"><svg class="ic " viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
@@ -1400,18 +1400,18 @@ $('funGrid').onclick=e=>{const b=e.target.closest('button'),box=e.target.closest
 .lf .lh{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8d9892}
 .lf .lh i{width:7px;height:7px;border-radius:50%;background:#5bcf8d;box-shadow:0 0 8px #5bcf8d;animation:lfp 1.4s ease-in-out infinite}
 @keyframes lfp{50%{opacity:.25}}
-.lf ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;min-width:0}
-.lf li{display:flex;align-items:center;gap:8px;font-size:13px;line-height:18px;color:#ebecec;min-width:0}
-.lf li b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.lf ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:row;gap:8px;min-width:0}
+.lf li{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:4px;padding:6px 9px;border-radius:8px;background:#141917;border:1px solid #23332b;color:#ebecec}
+.lf li b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;font-weight:600;line-height:17px}
+.lf li .m{display:flex;align-items:center;justify-content:space-between;gap:6px}
 .lf li em{font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:0 7px;border-radius:5px;line-height:16px}
-.lf li small{color:#6f7a74;font-size:11px;min-width:34px;text-align:right}
-.lf li.w em{background:#12341f;color:#7ff0ad;border:1px solid #2d7a4d}
-.lf li.r em{background:#3a1717;color:#ff8c8c;border:1px solid #7a2d2d}
-.lf li.e{color:#6f7a74;font-size:13px}
+.lf li small{color:#6f7a74;font-size:10.5px}
+.lf li.w{border-color:#2d7a4d}.lf li.w em{background:#12341f;color:#7ff0ad;border:1px solid #2d7a4d}
+.lf li.r{border-color:#7a2d2d}.lf li.r em{background:#3a1717;color:#ff8c8c;border:1px solid #7a2d2d}
+.lf li.e{border:0;background:none;padding:0;color:#6f7a74;font-size:13px}
 .lf li.n{animation:lfin .6s ease-out}
 @keyframes lfin{from{opacity:0;transform:translateY(-6px);background:#5bcf8d33}}
-.lf.wide ul{flex-direction:row;flex-wrap:wrap;gap:8px}
-.lf.wide li{flex:1 1 200px;background:#141917;border-radius:8px;padding:4px 10px}
+.lf.wide li{flex:0 1 220px}
 </style>
 <script>
 (function(){
@@ -1420,14 +1420,14 @@ const ul=lf.querySelector('ul'),cf=lf.parentElement;let last='';
 function fit(){try{const cols=getComputedStyle(cf).gridTemplateColumns.split(' ').length||1;
 const vis=[...cf.children].filter(c=>c!==lf&&!c.hidden&&getComputedStyle(c).display!=='none').length;
 const hole=(cols-vis%cols)%cols;lf.classList.toggle('wide',!hole);lf.style.gridColumn=hole?'span '+hole:'1 / -1'}catch(e){}}
-function render(){let a=[];try{a=LOG.filter(l=>l&&(l.st==='won'||l.st==='rr')).sort((x,y)=>(y.t||0)-(x.t||0)).slice(0,5)}catch(e){}
+function render(){let a=[];try{a=LOG.filter(l=>l&&(l.st==='won'||l.st==='rr')).sort((x,y)=>(y.t||0)-(x.t||0)).slice(0,3)}catch(e){}
 const key=a.map(l=>l.id+l.st+(l.t||0)).join('|');if(key===last)return;const fresh=last!==''&&a.length>0;last=key;
 ul.textContent='';
 if(!a.length){const li=document.createElement('li');li.className='e';li.textContent='Пока пусто — выпавшие появятся здесь';ul.append(li);fit();return}
 a.forEach((l,i)=>{const li=document.createElement('li'),b=document.createElement('b'),em=document.createElement('em'),s=document.createElement('small');
 li.className=l.st==='won'?'w':'r';if(i===0&&fresh)li.classList.add('n');
 b.textContent=l.name||'—';em.textContent=l.st==='won'?'выиграл':'рерол';s.textContent=l.time||'';
-if(l.st==='rr'&&l.reason)li.title=l.reason;li.append(b,em,s);ul.append(li)});fit()}
+if(l.st==='rr'&&l.reason)li.title=l.reason;const m=document.createElement('div');m.className='m';m.append(em,s);li.append(b,m);ul.append(li)});fit()}
 window.lfRender=render;
 addEventListener('resize',fit);
 new MutationObserver(fit).observe(cf,{attributes:true,attributeFilter:['hidden'],subtree:true});
