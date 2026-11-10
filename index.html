@@ -1450,19 +1450,11 @@ function click(a,n){if(!CB.length)return false;const s=a.createBufferSource(),g=
 function noise(a){if(!NB){NB=a.createBuffer(1,a.sampleRate*.5,a.sampleRate);const d=NB.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1}return NB}
 function hit(a,d,t,v,deep){const o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.setValueAtTime(deep?130:210,t);o.frequency.exponentialRampToValueAtTime(deep?45:90,t+.12);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+(deep?.5:.14));o.connect(g);g.connect(d);o.start(t);o.stop(t+(deep?.55:.16));
  const s=a.createBufferSource(),f=a.createBiquadFilter(),g2=a.createGain();s.buffer=noise(a);f.type='highpass';f.frequency.value=deep?600:1400;g2.gain.setValueAtTime(v*.8,t);g2.gain.exponentialRampToValueAtTime(.001,t+(deep?.35:.09));s.connect(f);f.connect(g2);g2.connect(d);s.start(t,Math.random()*.2,.4)}
-function tick(){if(!on()||RS)return;const a=ctx();if(!a)return;const n=a.currentTime+.005;if(n-lt<.035)return;lt=n;
- const o=a.createOscillator(),g=a.createGain(),lp=a.createBiquadFilter();o.type='sine';o.frequency.setValueAtTime(900,n);o.frequency.exponentialRampToValueAtTime(500,n+.02);lp.type='lowpass';lp.frequency.value=1800;
- g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(.06,n+.002);g.gain.exponentialRampToValueAtTime(.0001,n+.025);o.connect(lp);lp.connect(g);g.connect(a.destination);o.start(n);o.stop(n+.03)}
-function soft(k){if(!on())return;const a=ctx();if(!a)return;const n=a.currentTime+.01;
- const ping=(f,t,len,v)=>{const o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.002);g.gain.exponentialRampToValueAtTime(.0001,t+len);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+len+.02)};
- const puff=(t,len,v,f0,f1,q)=>{const b=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain();b.buffer=noise(a);f.type='bandpass';f.frequency.setValueAtTime(f0,t);f.frequency.exponentialRampToValueAtTime(f1,t+len);f.Q.value=q||1;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+Math.min(.02,len/3));g.gain.exponentialRampToValueAtTime(.0001,t+len);b.connect(f);f.connect(g);g.connect(a.destination);b.start(t,Math.random()*.2,len+.02)};
- const thud=(t,v,f0,f1,len)=>{const o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(f1,t+len*.7);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.006);g.gain.exponentialRampToValueAtTime(.0001,t+len);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+len+.02)};
- if(k==='knock'){thud(n,.06,220,140,.12);puff(n+.02,.05,.03,2200,1800,3)}            // ключ вставляется
- else if(k==='unlock'){puff(n,.05,.05,3000,2500,4);ping(2300,n,.07,.03);ping(3100,n+.045,.09,.025);thud(n+.03,.08,260,130,.14)} // щелчок замка
- else if(k==='open'){thud(n,.12,130,60,.3);puff(n,.18,.04,400,250,.8);puff(n+.12,.3,.025,700,1400,.8);ping(880,n+.18,.7,.012)}} // крышка открывается
+function tick(){}
+function soft(){}
 function stop(){RS=0;['roll','caseOpen','caseRoll','wheelRoll'].forEach(k=>{if(F[k]){try{F[k].pause()}catch(e){}}});if(RG){try{RG.gain.cancelScheduledValues(A.currentTime);RG.gain.setTargetAtTime(0,A.currentTime,.03)}catch(e){}RG=null}}
-function roll(ms,kind){stop();if(!ms||!on())return;const k=kind==='wheel'?'wheelRoll':kind==='case'?'caseRoll':'roll';if(file(k,.85)){RS=1;return}if(k!=='roll'&&file('roll',.7))return;const a=ctx();if(!a)return;}
-function open(t){if(!on())return;const a=ctx();if(a)loadClicks(a);if(t==='roulette'&&file('caseOpen',.9))return;file('open',.9)}
+function roll(){}
+function open(){}
 function premier(){if(!on())return;file('premier',1)}
 function stopPremier(){try{if(F.premier)F.premier.pause()}catch(e){}}
 function bigHit(){if(!on()||file('hit',.9))return;const a=ctx();if(!a)return;const n=a.currentTime+.01;
