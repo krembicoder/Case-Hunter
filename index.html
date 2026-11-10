@@ -1104,7 +1104,7 @@ async function spin(type,pool,w){
   const cw=box.clientWidth,base=8+WI*CW+CW/2-cw/2,fake=Math.random()<.2,xf=base+(Math.random()-.5)*70,x=fake?base+CW+(Math.random()-.5)*50:xf,SD=DUR-T1-500,S1=fake?SD-1500:SD,cards=[...strip.children];
   strip.style.transform='translateX(0)';void strip.offsetWidth;
   if(!skip)strip.style.transition='transform '+S1+'ms cubic-bezier(.04,.85,.1,1)';
-  strip.style.transform='translateX('+(-x)+'px)';SFX.roll(skip?0:SD,'case');
+  strip.style.transform='translateX('+(-x)+'px)';SFX.open();SFX.roll(skip?0:SD,'case');
   let li=-1;
   const track=async ms=>{const t=Date.now();while(Date.now()-t<ms&&!skip){
    try{const m=new DOMMatrix(getComputedStyle(strip).transform),i=Math.floor((-m.m41+cw/2-8)/CW);if(i!==li&&i>=0){const n=li<0?1:Math.min(5,Math.abs(i-li));li=i;SFX.tick(n)}}catch(e){}
@@ -1451,11 +1451,13 @@ function noise(a){if(!NB){NB=a.createBuffer(1,a.sampleRate*.5,a.sampleRate);cons
 function hit(a,d,t,v,deep){const o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.setValueAtTime(deep?130:210,t);o.frequency.exponentialRampToValueAtTime(deep?45:90,t+.12);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+(deep?.5:.14));o.connect(g);g.connect(d);o.start(t);o.stop(t+(deep?.55:.16));
  const s=a.createBufferSource(),f=a.createBiquadFilter(),g2=a.createGain();s.buffer=noise(a);f.type='highpass';f.frequency.value=deep?600:1400;g2.gain.setValueAtTime(v*.8,t);g2.gain.exponentialRampToValueAtTime(.001,t+(deep?.35:.09));s.connect(f);f.connect(g2);g2.connect(d);s.start(t,Math.random()*.2,.4)}
 function tick(n){if(!on())return;const a=ctx();if(!a)return;n=Math.max(1,Math.min(5,(n|0)||1));const now=a.currentTime;
- for(let i=0;i<n;i++){const t=now+i*.017,o=a.createOscillator(),g=a.createGain(),f=a.createBiquadFilter(),b=470+Math.random()*30;
-  o.type='sine';o.frequency.setValueAtTime(b*1.5,t);o.frequency.exponentialRampToValueAtTime(b,t+.05);
-  f.type='lowpass';f.frequency.value=1200;
-  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.04,t+.005);g.gain.exponentialRampToValueAtTime(.0001,t+.13);
-  o.connect(f);f.connect(g);g.connect(a.destination);o.start(t);o.stop(t+.14)}}
+ if(!tick.nb){const L=a.sampleRate*.03|0,b=a.createBuffer(1,L,a.sampleRate),d=b.getChannelData(0);for(let k=0;k<L;k++)d[k]=Math.random()*2-1;tick.nb=b}
+ for(let i=0;i<n;i++){const t=now+i*.016,s=a.createBufferSource(),bp=a.createBiquadFilter(),g=a.createGain(),o=a.createOscillator(),og=a.createGain(),f0=1900+Math.random()*500;
+  s.buffer=tick.nb;bp.type='bandpass';bp.frequency.value=f0;bp.Q.value=2.5;
+  g.gain.setValueAtTime(.05,t);g.gain.exponentialRampToValueAtTime(.0001,t+.022);
+  s.connect(bp);bp.connect(g);g.connect(a.destination);s.start(t);s.stop(t+.03);
+  o.type='triangle';o.frequency.value=f0*.9;og.gain.setValueAtTime(.012,t);og.gain.exponentialRampToValueAtTime(.0001,t+.035);
+  o.connect(og);og.connect(a.destination);o.start(t);o.stop(t+.04)}}
 function error(){if(!on()||file('error',1))return;const a=ctx();if(!a)return;const n=a.currentTime+.02,lp=a.createBiquadFilter(),out=a.createGain();
  lp.type='lowpass';lp.frequency.value=2000;out.gain.value=.5;lp.connect(out);out.connect(a.destination);
  [[330,0],[247,.2]].forEach(([f,d])=>{const o=a.createOscillator(),g=a.createGain(),t=n+d;o.type='sawtooth';o.frequency.value=f;
@@ -1464,7 +1466,11 @@ function error(){if(!on()||file('error',1))return;const a=ctx();if(!a)return;con
 function soft(){}
 function stop(){RS=0;['roll','caseOpen','caseRoll','wheelRoll'].forEach(k=>{if(F[k]){try{F[k].pause()}catch(e){}}});if(RG){try{RG.gain.cancelScheduledValues(A.currentTime);RG.gain.setTargetAtTime(0,A.currentTime,.03)}catch(e){}RG=null}}
 function roll(){}
-function open(){}
+function open(){if(!on()||file('open',.5))return;const a=ctx();if(!a)return;const t=a.currentTime+.01,m=a.createGain();m.gain.value=.9;m.connect(a.destination);
+ const th=a.createOscillator(),tg=a.createGain();th.type='sine';th.frequency.setValueAtTime(140,t);th.frequency.exponentialRampToValueAtTime(60,t+.2);
+ tg.gain.setValueAtTime(0,t);tg.gain.linearRampToValueAtTime(.18,t+.01);tg.gain.exponentialRampToValueAtTime(.001,t+.25);th.connect(tg);tg.connect(m);th.start(t);th.stop(t+.27);
+ [[523,.14],[659,.24],[784,.34]].forEach(([f,d])=>{const o=a.createOscillator(),g=a.createGain(),u=t+d;o.type='sine';o.frequency.value=f;
+  g.gain.setValueAtTime(0,u);g.gain.linearRampToValueAtTime(.06,u+.02);g.gain.exponentialRampToValueAtTime(.001,u+.6);o.connect(g);g.connect(m);o.start(u);o.stop(u+.62)})}
 function premier(){if(!on())return;file('premier',1)}
 function stopPremier(){try{if(F.premier)F.premier.pause()}catch(e){}}
 function bigHit(){if(!on()||file('hit',.9))return;const a=ctx();if(!a)return;const n=a.currentTime+.01;
