@@ -1107,7 +1107,7 @@ async function spin(type,pool,w){
   strip.style.transform='translateX('+(-x)+'px)';SFX.roll(skip?0:SD,'case');
   let li=-1;
   const track=async ms=>{const t=Date.now();while(Date.now()-t<ms&&!skip){
-   try{const m=new DOMMatrix(getComputedStyle(strip).transform),i=Math.floor((-m.m41+cw/2-8)/CW);if(i!==li&&i>=0){const n=li<0?1:Math.min(5,Math.abs(i-li));li=i}}catch(e){}
+   try{const m=new DOMMatrix(getComputedStyle(strip).transform),i=Math.floor((-m.m41+cw/2-8)/CW);if(i!==li&&i>=0){const n=li<0?1:Math.min(5,Math.abs(i-li));li=i;SFX.tick(n)}}catch(e){}
    await new Promise(r=>requestAnimationFrame(r))}};
   await track(S1);
   if(fake&&!skip){o.querySelector('p').textContent='Почти…';await track(650);
