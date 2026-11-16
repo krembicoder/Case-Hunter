@@ -753,6 +753,61 @@ body::after{background:linear-gradient(115deg,transparent 0 22%,#4ecb8412 22% 34
 .flog{margin-top:10px;font-size:12.5px;color:#8d9892;display:grid;gap:3px}
 .hdr .side-nav a{padding:0 15px!important;gap:9px!important}.hdr .side-nav{gap:10px!important}.stt{margin-left:6px!important;padding:0 16px!important}.hl{gap:14px!important}
 .fc2 button,.fh button{background:#5ec27f!important;color:#06140b!important;border:0!important;font-weight:700!important;padding:10px!important;text-transform:none!important}.fh button{padding:8px 16px!important;background:#171b19!important;color:#e8efeb!important;border:1px solid #2a312d!important}
+/* ===== интерактив: экран игры ===== */
+.fh button+button{margin-left:0!important}
+#fxo{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;background:radial-gradient(ellipse at 50% 30%,#1f4733,#060a08 72%);color:#e8efeb}
+.fxbar{display:flex;align-items:center;gap:14px;padding:12px 18px}.fxbar .t{font-size:20px;font-weight:800}.fxbar .m{flex:1;text-align:center;color:#8fe0aa;font-size:14px}
+.fxstage{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:clamp(9px,min(1.45vw,2.3vh),24px)}
+.fxw{position:absolute;left:50%;bottom:3%;transform:translateX(-50%);padding:.4em 1.3em;border-radius:1em;background:#000b;border:.1em solid #f2b53d;color:#f6d675;font-size:2.4em;white-space:nowrap;animation:fxpop .7s cubic-bezier(.3,1.6,.5,1)}.fxw b{color:#fff}
+.rw .fxw{position:static;transform:none;font-size:2.2em;animation:fxpop2 .7s cubic-bezier(.3,1.6,.5,1)}@keyframes fxpop2{from{transform:scale(0)}}
+@keyframes fxpop{from{transform:translateX(-50%) scale(0)}}
+/* сейф */
+.sf{position:relative;width:30em;height:34em;border-radius:1.6em;background:linear-gradient(145deg,#7a857f,#2c3431 55%,#566159);border:.45em solid #151b18;box-shadow:0 2em 4em #000a,inset 0 0 2em #0008}
+.sf.sfshake{animation:fxshake .5s}
+@keyframes fxshake{20%{transform:translateX(-.6em)}40%{transform:translateX(.6em)}60%{transform:translateX(-.4em)}80%{transform:translateX(.4em)}}
+.sf .hg{position:absolute;left:-.9em;width:1em;height:3.6em;border-radius:.4em;background:linear-gradient(90deg,#9aa5a0,#4a5550);border:.15em solid #151b18}.sf .h1{top:16%}.sf .h2{bottom:16%}
+.sf-in{position:absolute;inset:1.6em;border-radius:.8em;background:radial-gradient(ellipse at 50% 35%,#f4ffe855,#0b130f 72%),#0b130f;overflow:hidden;box-shadow:inset 0 0 2em #000}
+.sf-man{position:absolute;bottom:.6em;left:50%;height:68%;transform:translateX(-50%);overflow:visible}
+.sf.open .sf-door>*{opacity:0;transition:opacity .6s .9s}
+.sf-man .al,.sf-man .ar{transform-box:fill-box;transform-origin:50% 6%}
+.sf.open .bob{animation:fxbob 1.2s ease-in-out infinite}.sf.open .al{animation:fxal .9s ease-in-out infinite alternate}.sf.open .ar{animation:fxar .9s .3s ease-in-out infinite alternate}
+@keyframes fxbob{50%{transform:translateY(-3px)}}@keyframes fxal{to{transform:rotate(38deg)}}@keyframes fxar{to{transform:rotate(-38deg)}}
+.sf-nick{position:absolute;top:7%;left:50%;transform:translateX(-50%) scale(0);max-width:94%;padding:.3em .9em;border-radius:.7em;background:linear-gradient(#f6d675,#c9962c);color:#2b1c05;font-weight:900;font-size:1.7em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 0 1.4em #f6d675aa;z-index:2}
+.sf.open .sf-nick{transform:translateX(-50%) scale(1);transition:transform .7s cubic-bezier(.3,1.6,.5,1) 1.7s}
+.sf-door{position:absolute;inset:1.6em;border-radius:.8em;background:linear-gradient(145deg,#97a29c,#3a4440 60%,#59645d);border:.3em solid #151b18;transform-origin:left center;transition:transform 1.9s cubic-bezier(.55,.05,.3,1);display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;box-shadow:inset 0 0 2em #0006}
+.sf.open .sf-door{transform:perspective(110em) rotateY(-115deg)}
+.sf-plate{font-weight:800;letter-spacing:.3em;color:#d6ddd9;font-size:1.1em;text-shadow:0 .1em 0 #0007}
+.sf-disp{display:flex;gap:.25em;padding:.3em .4em;background:#07100b;border-radius:.2em;border:.06em solid #1c2924;box-shadow:inset 0 0 .4em #000}
+.dc{width:1.1em;height:1.5em;display:grid;place-items:center;border-radius:.12em;background:#13201a;color:#4d6b5b;font-weight:800;font-variant-numeric:tabular-nums;border:.04em solid #24382f;transition:background .3s,color .3s,box-shadow .3s}
+.dc.ok{background:#14532d;color:#9bffc4;border-color:#4ade80;box-shadow:0 0 .5em #22c55e,inset 0 0 .3em #22c55e88}
+.dc.pop{animation:fxdc .6s}@keyframes fxdc{0%{transform:scale(1.5);background:#4ade80}100%{transform:scale(1)}}
+.sf-last{min-height:1.6em;color:#c8d3cd}.sf-last b{color:#8fe0aa;margin-right:.6em}.sf-last i{font-style:normal;font-weight:800;padding:0 .1em;color:#9aa5a0}.sf-last i.g{color:#4ade80}
+.sf-wheel{position:relative;width:7em;height:7em;border-radius:50%;background:radial-gradient(circle at 35% 30%,#d5dcd8,#5b6761 70%);border:.3em solid #151b18;box-shadow:0 .4em 1em #0008}
+.sf-wheel i{position:absolute;left:50%;top:50%;width:.7em;height:48%;margin-left:-.35em;transform-origin:50% 0;background:#242c28;border-radius:.4em}
+.sf-wheel i:nth-child(1){transform:rotate(0)}.sf-wheel i:nth-child(2){transform:rotate(60deg)}.sf-wheel i:nth-child(3){transform:rotate(120deg)}.sf-wheel i:nth-child(4){transform:rotate(180deg)}.sf-wheel i:nth-child(5){transform:rotate(240deg)}.sf-wheel i:nth-child(6){transform:rotate(300deg)}
+.sf-wheel b{position:absolute;inset:38%;border-radius:50%;background:#7c8883;border:.15em solid #151b18}
+.sf.unlock .sf-wheel{animation:fxspin 1.3s ease-in-out}@keyframes fxspin{to{transform:rotate(-540deg)}}
+/* рулетка */
+.rw{display:flex;flex-direction:column;align-items:center;gap:1em}.rw canvas{width:min(34em,92vw,62vh);height:auto;aspect-ratio:1}
+.rres{min-width:14em;text-align:center;padding:.4em 1.2em;border-radius:99px;background:#1a2620;border:.1em solid #2d5a41;font-size:1.6em;font-weight:800;color:#fff;transition:background .3s}
+.rcs{display:flex;gap:.8em;flex-wrap:wrap;justify-content:center}.rch{padding:.35em 1em;border-radius:99px;font-weight:700;color:#fff;font-size:1.1em;text-shadow:0 .08em .15em #0007}
+/* шкатулки */
+.tw{position:relative;width:min(62em,100%);height:34em}
+.tnote{position:absolute;left:0;right:0;top:2%;text-align:center;font-size:1.6em;font-weight:800;color:#f6d675;text-shadow:0 .1em .3em #000}
+.tsurf{position:absolute;left:-3%;right:-3%;bottom:0;height:56%;border-radius:4em 4em 0 0/2.4em 2.4em 0 0;background:repeating-linear-gradient(90deg,#00000014 0 .2em,transparent .2em 3em),linear-gradient(#7a4f27,#432813 85%);border-top:.4em solid #c08a4f;box-shadow:0 2em 3em #000a}
+.bx{position:absolute;width:6.4em;height:5.4em;transform:translate(-50%,-50%);transition:left 1.5s cubic-bezier(.4,0,.2,1),top 1.5s cubic-bezier(.4,0,.2,1),transform 1.5s cubic-bezier(.4,0,.2,1),opacity .8s}
+.bx.shake{animation:fxbx .18s infinite alternate}@keyframes fxbx{from{margin-left:-.35em;margin-top:.1em}to{margin-left:.35em;margin-top:-.1em}}
+.bx.gone{opacity:0;transform:translate(-50%,-30%) scale(.5);pointer-events:none}
+.bx.pick{transform:translate(-50%,-50%) scale(1.9);z-index:5;filter:drop-shadow(0 0 1.2em #ffd76a99)}
+.bx-fr{position:absolute;left:0;right:0;bottom:0;height:3.5em;z-index:3;border-radius:.4em .4em .6em .6em;background:linear-gradient(90deg,transparent 14%,#d9a441 14% 17%,transparent 17% 83%,#d9a441 83% 86%,transparent 86%),linear-gradient(#9a6228,#5a3515);border:.18em solid #e0b24a;box-shadow:0 .6em 1em #0008;display:grid;place-items:center}
+.bx-fr b{font-size:1.5em;color:#ffe9a8;text-shadow:0 .08em .1em #000}
+.bx-fr::before{content:"";position:absolute;top:-.2em;left:50%;width:1em;height:1.1em;margin-left:-.5em;border-radius:.2em;background:linear-gradient(#ffe08a,#b8860b);border:.1em solid #6b4a10}
+.bx-lid{position:absolute;left:0;right:0;bottom:3.3em;height:2.1em;z-index:2;border-radius:3.4em 3.4em .3em .3em/2.1em 2.1em .3em .3em;background:linear-gradient(#b87a38,#7a4a1f);border:.18em solid #e0b24a;transform-origin:50% 100%;transition:transform 1s cubic-bezier(.3,1.3,.5,1)}
+.bx.open .bx-lid{transform:perspective(30em) rotateX(112deg)}
+.bx-card{position:absolute;left:50%;bottom:2.6em;z-index:2;transform:translate(-50%,1.6em) scale(.7);opacity:0;min-width:8em;max-width:15em;padding:.55em 1em;text-align:center;font-weight:900;font-size:1.05em;color:#2b1c05;background:linear-gradient(#ffe9a8,#e0a93a);border-radius:.5em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 0 1.4em #ffd76acc;transition:transform .9s cubic-bezier(.3,1.4,.5,1) .8s,opacity .4s .8s}
+.bx.pick .bx-vc{opacity:0!important}
+.bx.open .bx-card{transform:translate(-50%,-.8em) scale(1);opacity:1}
+.bx-vc{position:absolute;top:-1.6em;left:50%;transform:translateX(-50%);min-width:1.6em;text-align:center;padding:.1em .5em;border-radius:99px;background:#5ec27f;color:#06140b;font-weight:800;font-size:.9em;opacity:0;transition:opacity .3s;z-index:6}
 </style></head>
 <body>
 <svg width="0" height="0" style="position:absolute"><symbol id="crown" viewBox="0 0 64 40"><path d="M5 36 9 11l14 12L32 5l9 18 14-12 4 25Z" fill="#0b0f0d" stroke="#76d19d" stroke-width="3" stroke-linejoin="round"/><path d="M8 36h48" stroke="#76d19d" stroke-width="3"/></symbol></svg>
@@ -1334,59 +1389,151 @@ lf.before(mk('<h2 style="margin-top:18px">Дополнительные филь�
 $('banPrev').checked=J('ch_bp',false);$('banPrev').onchange=()=>S('ch_bp',$('banPrev').checked);
 /* ---------- 4. интерактивные розыгрыши ---------- */
 const M={
-race:{n:'Гонка сообщений',d:'Кто первым напишет слово несколько раз подряд в одном сообщении.',cmd:'охотник охотник охотник охотник охотник',cfg:[['word','Слово','охотник'],['n','Сколько раз','5']]},
-guess:{n:'Угадай число',d:'Бот загадал число. Зрители пишут варианты, бот подсказывает «больше» или «меньше».',cmd:'число, например 512',cfg:[['max','До какого числа','1000']]},
-cases:{n:'Выбери правильный кейс',d:'5 закрытых кейсов, приз спрятан в одном. Выживают угадавшие, можно несколько раундов.',cmd:'!кейс 1 … !кейс 5',cfg:[['rounds','Раундов','2'],['sec','Секунд на раунд','30']]},
-rps:{n:'Камень, ножницы, бумага',d:'Бот скрытно выбирает ход. Дальше проходят те, кто его обыграл.',cmd:'камень / ножницы / бумага',cfg:[['rounds','Раундов','2'],['sec','Секунд на раунд','20']]},
-sector:{n:'Угадай сектор рулетки',d:'Рулетка с цветными секторами. Зрители заранее выбирают цвет, побеждают угадавшие.',cmd:'красный / синий / зелёный / жёлтый',cfg:[['rounds','Раундов','2'],['sec','Секунд на раунд','25']]},
-vault:{n:'Взлом сейфа',d:'Сейф с кодом. Бот отвечает, сколько цифр угадано и сколько стоит на своих местах.',cmd:'4 цифры, например 1234',cfg:[['len','Цифр в коде','4']]}};
+cases:{n:'Выбери правильный кейс',d:'На столе стоят шкатулки, приз спрятан в одной. Верная приближается к центру, остальные уезжают, внутри лежит ник победителя.',cmd:'!кейс 1, !кейс 2 …',cfg:[['cnt','Сколько шкатулок','5'],['rounds','Раундов','2'],['sec','Секунд на раунд','30']]},
+sector:{n:'Угадай сектор рулетки',d:'Рулетка как в казино: крутится барабан, шарик падает в сектор. Зрители выбирают цвет, побеждают угадавшие.',cmd:'красный / синий / зелёный / жёлтый',cfg:[['rounds','Раундов','2'],['sec','Секунд на раунд','25']]},
+vault:{n:'Взлом сейфа',d:'На экране сейф и код. Угаданные цифры загораются зелёным, когда код взломан — сейф открывается, внутри стоит победитель.',cmd:'4 цифры, например 1234',cfg:[['len','Цифр в коде','4']]}};
 const COL={красный:'#e5484d',синий:'#3e63dd',зелёный:'#30a46c',жёлтый:'#f5c400'},COLS=Object.keys(COL);
-const beat={камень:'бумага',ножницы:'камень',бумага:'ножницы'},EMO={камень:'✊',ножницы:'✌️',бумага:'✋'};
 const nav=document.querySelector('.side-nav'),a=mk('<svg class="ic" viewBox="0 0 24 24"><path d="M12 2l3 6 6 1-4.500 4.500L18 20l-6-3-6 3 1.500-6.500L3 9l6-1z"/></svg>Интерактив','',  'a');a.dataset.v='fun';
 nav.insertBefore(a,nav.querySelector('[data-v="settings"]'));
 a.onclick=e=>{e.preventDefault();show('fun')};
 const fv=mk('<h2 style="margin:0 0 6px">Интерактивные розыгрыши</h2><p class="hint" style="margin:0 0 14px">Зрители соревнуются прямо в чате Twitch. Выбери режим и нажми «Запустить». Победитель выбирается автоматически.</p><div id="funRun"></div><div class="fgrid" id="funGrid"></div>','view fun','section');fv.id='v-fun';fv.hidden=true;
 document.querySelector('.content').append(fv);
 $('funGrid').innerHTML=Object.entries(M).map(([k,m])=>'<div class="fc2" data-k="'+k+'"><b>'+m.n+'</b><p>'+m.d+'</p><code>'+esc(m.cmd)+'</code><div class="fcf">'+m.cfg.map(c=>'<label>'+c[1]+'<input data-c="'+c[0]+'" value="'+c[2]+'"></label>').join('')+'</div><button class="primary">Запустить</button></div>').join('');
-let F=null;const prize=()=>$('prize').value||'приз';
-const L=t=>{F.log.unshift(t);F.log=F.log.slice(0,7);paint()};
-function paint(){const r=$('funRun');if(!F){r.innerHTML='';return}
-const m=M[F.k];let st='';
-if(F.k==='sector')st='<div class="dial" style="background:conic-gradient('+COLS.map((c,i)=>COL[c]+' '+i*25+'% '+(i+1)*25+'%').join(',')+');transform:rotate('+(F.rot||0)+'deg)"></div><i class="ptr"></i>';
-if(F.k==='cases')st='<div class="cb5">'+[1,2,3,4,5].map(i=>'<span class="'+(F.hit==i?'hit':'')+'">'+i+'</span>').join('')+'</div>';
-if(F.k==='rps')st='<div class="bot">'+(F.bot?EMO[F.bot]:'❔')+'</div>';
-const ch=['cases','rps','sector'].includes(F.k);
-r.innerHTML='<div class="frun"><div class="fh"><b>'+m.n+'</b><span>'+(F.done?'завершено':'идёт')+'</span><button id="funStop">'+(F.done?'Закрыть':'Остановить')+'</button></div><div class="fst">'+st+'</div><div class="fmeta">'+(ch&&!F.done?'Раунд '+F.round+'/'+F.cfg.rounds+' · осталось <b>'+F.left+'</b> с · голосов: <b>'+Object.keys(F.votes).length+'</b>'+(F.surv?' · в игре: '+F.surv.size:''):'Участников: <b>'+F.users.size+'</b>')+'</div>'+(F.win?'<div class="fwin">🏆 Победитель: <b>'+esc(F.win)+'</b></div>':'')+'<div class="flog">'+F.log.map(x=>'<div>'+esc(x)+'</div>').join('')+'</div></div>';
-$('funStop').onclick=stopF}
+let F=null,SID=0,ST=null;const prize=()=>$('prize').value||'приз';
+const fx=(f,...a)=>{try{window.SFX[f](...a)}catch(e){}};
+const zz=ms=>new Promise(r=>setTimeout(r,ms));
+const L=t=>{if(!F)return;F.log.unshift(t);F.log=F.log.slice(0,7);paint()};
+/* ---------- экран игры (оверлей поверх всего) ---------- */
+function stageStop(){if(ST){if(ST.raf)cancelAnimationFrame(ST.raf);try{ST.o.remove()}catch(e){}}ST=null}
+addEventListener('keydown',e=>{if(e.key==='Escape'&&ST)ST.o.hidden=true});
+const MAN='<svg class="sf-man" viewBox="0 0 120 200"><g class="bob"><ellipse cx="60" cy="192" rx="32" ry="5" fill="#0007"/><rect x="42" y="120" width="15" height="64" rx="5" fill="#1f2a44"/><rect x="63" y="120" width="15" height="64" rx="5" fill="#1f2a44"/><rect x="37" y="179" width="23" height="10" rx="5" fill="#111"/><rect x="60" y="179" width="23" height="10" rx="5" fill="#111"/><rect x="30" y="66" width="60" height="64" rx="14" fill="#2c3e6b"/><path d="M50 66 L60 94 L70 66 Z" fill="#f2f2f2"/><path d="M57 72 L63 72 L65 100 L60 108 L55 100 Z" fill="#c0392b"/><g class="al"><rect x="13" y="68" width="17" height="58" rx="8.5" fill="#2c3e6b"/><circle cx="21.500" cy="130" r="8.500" fill="#e2bd9c"/></g><g class="ar"><rect x="90" y="68" width="17" height="58" rx="8.5" fill="#2c3e6b"/><circle cx="98.500" cy="130" r="8.500" fill="#e2bd9c"/></g><rect x="54" y="52" width="12" height="16" rx="4" fill="#d6ae8a"/><circle cx="60" cy="36" r="22" fill="#e2bd9c"/></g></svg>';
+function stageInit(){stageStop();const k=F.k,o=document.createElement('div');o.id='fxo';
+ o.innerHTML='<div class="fxbar"><b class="t">'+M[k].n+'</b><span class="m" id="fxm"></span><button id="fxc">✕ Скрыть</button></div><div class="fxstage" id="fxs"></div>';
+ document.body.append(o);ST={k,o,raf:0,s:o.querySelector('#fxs')};o.querySelector('#fxc').onclick=()=>{o.hidden=true};
+ const s=ST.s;
+ if(k==='vault'){const n=F.cfg.len,fs=n<=4?2.6:n<=6?2.1:n<=8?1.6:1.25;
+  s.innerHTML='<div class="sf" id="sf"><i class="hg h1"></i><i class="hg h2"></i><div class="sf-in"><div class="sf-nick"></div>'+MAN+'</div><div class="sf-door"><div class="sf-plate">СЕЙФ</div><div class="sf-disp" style="font-size:'+fs+'em">'+Array.from({length:n},()=>'<span class="dc">?</span>').join('')+'</div><div class="sf-last">Пиши код в чат</div><div class="sf-wheel"><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div></div></div>'}
+ if(k==='cases'){const n=F.cfg.cnt;
+  s.innerHTML='<div class="tw"><div class="tnote">Выбирай шкатулку: !кейс 1 … !кейс '+n+'</div><div class="tsurf"></div>'+Array.from({length:n},(_,i)=>'<div class="bx" data-n="'+(i+1)+'"><div class="bx-vc">0</div><div class="bx-lid"></div><div class="bx-card"></div><div class="bx-fr"><b>'+(i+1)+'</b></div></div>').join('')+'</div>';
+  ST.tw=s.querySelector('.tw');layoutBoxes()}
+ if(k==='sector'){
+  s.innerHTML='<div class="rw"><canvas id="rc" width="720" height="720"></canvas><div class="rres" id="rres">Делайте ставки!</div><div class="rcs">'+COLS.map(c=>'<span class="rch" data-c="'+c+'" style="background:'+COL[c]+'">'+c+' · <b>0</b></span>').join('')+'</div><div class="fxw" id="fxw" hidden></div></div>';
+  const cv=s.querySelector('#rc');ST.R={cv,cx:cv.getContext('2d'),rot:0,ba:0,br:.81,ball:0,hl:-1,spin:0,anim:null,lt:0};ST.raf=requestAnimationFrame(rloop)}}
+/* --- шкатулки --- */
+function layoutBoxes(){const n=F.cfg.cnt,per=n<=6?n:Math.ceil(n/2),rows=n<=6?1:2;
+ ST.tw.querySelectorAll('.bx').forEach((b,i)=>{const r=Math.floor(i/per),c=i%per,inRow=r===rows-1?n-per*(rows-1):per;
+  b.style.left=(50+(c-(inRow-1)/2)*(88/per))+'%';b.style.top=(rows===1?60:52+r*22)+'%'})}
+function note(t){const e=ST&&ST.tw&&ST.tw.querySelector('.tnote');if(e)e.textContent=t}
+async function fxCases(ci,ok,wn){const s=ST,bx=[...s.tw.querySelectorAll('.bx')],hit=bx[ci];
+ note('Открываем шкатулки…');bx.forEach(b=>b.classList.add('shake'));fx('roll',1700,'case');await zz(1700);fx('stop');
+ if(ST!==s)return;bx.forEach(b=>b.classList.remove('shake'));
+ note('Приз в шкатулке №'+(ci+1)+'!');
+ bx.forEach((b,i)=>{if(b!==hit)setTimeout(()=>b.classList.add('gone'),i*90)});fx('tick',3);
+ hit.style.left='50%';hit.style.top='46%';hit.classList.add('pick');await zz(2000);if(ST!==s)return;
+ hit.querySelector('.bx-card').textContent=wn?wn:(ok.length?'Проходят дальше: '+ok.length:'Никто не угадал');
+ hit.classList.add('open');fx('open');await zz(2400);if(wn)fx('accept');else await zz(1200)}
+function resetCases(){if(!ST||!ST.tw)return;ST.tw.querySelectorAll('.bx').forEach(b=>{b.classList.remove('gone','pick','open');b.querySelector('.bx-card').textContent=''});layoutBoxes();note('Выбирай шкатулку: !кейс 1 … !кейс '+F.cfg.cnt)}
+/* --- рулетка как в казино --- */
+function drawR(S,now){const c=S.cv,x=S.cx,W=c.width,R=W/2-8,n=24,a=Math.PI*2/n,TAU=Math.PI*2;
+ x.clearRect(0,0,W,W);x.save();x.translate(W/2,W/2);
+ let g=x.createRadialGradient(0,0,R*.8,0,0,R);g.addColorStop(0,'#6b4423');g.addColorStop(.5,'#9a6a35');g.addColorStop(1,'#3a2410');
+ x.fillStyle=g;x.beginPath();x.arc(0,0,R,0,TAU);x.fill();x.lineWidth=6;x.strokeStyle='#e0b24a';x.beginPath();x.arc(0,0,R-3,0,TAU);x.stroke();
+ for(let i=0;i<16;i++){const q=i*TAU/16;x.fillStyle='#f6d675';x.beginPath();x.arc(Math.cos(q)*R*.94,Math.sin(q)*R*.94,5,0,TAU);x.fill()}
+ g=x.createRadialGradient(0,0,R*.72,0,0,R*.88);g.addColorStop(0,'#0d1210');g.addColorStop(1,'#2a3531');x.fillStyle=g;x.beginPath();x.arc(0,0,R*.88,0,TAU);x.fill();
+ x.save();x.rotate(S.rot);
+ for(let i=0;i<n;i++){const cn=i*a-Math.PI/2;
+  x.beginPath();x.arc(0,0,R*.74,cn-a/2,cn+a/2);x.arc(0,0,R*.5,cn+a/2,cn-a/2,true);x.closePath();x.fillStyle=COL[COLS[i%4]];x.fill();x.lineWidth=2;x.strokeStyle='#f3d27a';x.stroke();
+  x.save();x.rotate(cn);x.translate(R*.62,0);x.rotate(Math.PI/2);x.fillStyle='#fff';x.font='bold '+Math.round(R*.065)+'px Inter,sans-serif';x.textAlign='center';x.textBaseline='middle';x.shadowColor='#000a';x.shadowBlur=4;x.fillText(String(i+1),0,0);x.restore()}
+ g=x.createRadialGradient(0,0,0,0,0,R*.5);g.addColorStop(0,'#caa04a');g.addColorStop(.35,'#3a2a12');g.addColorStop(1,'#14100a');x.fillStyle=g;x.beginPath();x.arc(0,0,R*.5,0,TAU);x.fill();
+ x.strokeStyle='#e0b24a';x.lineWidth=3;for(let i=0;i<8;i++){x.save();x.rotate(i*TAU/8);x.beginPath();x.moveTo(R*.14,0);x.lineTo(R*.48,0);x.stroke();x.restore()}
+ g=x.createRadialGradient(-R*.03,-R*.03,2,0,0,R*.14);g.addColorStop(0,'#fff3b0');g.addColorStop(1,'#a97a1d');x.fillStyle=g;x.beginPath();x.arc(0,0,R*.14,0,TAU);x.fill();
+ x.fillStyle='#8a5f14';x.fillRect(-R*.2,-R*.012,R*.4,R*.024);x.fillRect(-R*.012,-R*.2,R*.024,R*.4);
+ if(S.hl>=0){const cn=S.hl*a-Math.PI/2;x.beginPath();x.arc(0,0,R*.74,cn-a/2,cn+a/2);x.arc(0,0,R*.5,cn+a/2,cn-a/2,true);x.closePath();x.lineWidth=6;x.strokeStyle='rgba(255,255,255,'+(.55+.45*Math.sin(now/130))+')';x.shadowColor='#fff';x.shadowBlur=18;x.stroke()}
+ x.restore();
+ if(S.ball){const bx=Math.cos(S.ba)*S.br*R,by=Math.sin(S.ba)*S.br*R,r=R*.032;x.shadowColor='#000a';x.shadowBlur=8;g=x.createRadialGradient(bx-r*.35,by-r*.35,1,bx,by,r);g.addColorStop(0,'#fff');g.addColorStop(1,'#b9bec2');x.fillStyle=g;x.beginPath();x.arc(bx,by,r,0,TAU);x.fill()}
+ x.restore()}
+function rloop(now){const s=ST;if(!s||s.k!=='sector')return;const S=s.R,dt=Math.min(50,now-(S.lt||now));S.lt=now;
+ if(S.anim)S.anim(now);else{S.rot+=.0025*dt/16.7;if(S.ball&&S.stuck!=null)S.ba=S.rot+S.stuck}drawR(S,now);s.raf=requestAnimationFrame(rloop)}
+function fxSector(ci,ok,wn){return new Promise(res=>{const s=ST,S=s.R,n=24,a=Math.PI*2/n,cen=ci*a-Math.PI/2,TAU=Math.PI*2;
+ const rot0=S.rot,rotEnd=rot0+TAU*(3+Math.random()*1.5),K=TAU*(7+Math.random()*2),phiEnd=rotEnd+cen,DUR=7000,t0=performance.now(),col=COLS[ci%4];
+ S.spin=1;S.hl=-1;S.ball=1;S.stuck=null;s.s.querySelector('#rres').textContent='Крутим…';s.s.querySelector('#rres').style.background='';fx('roll',DUR,'wheel');
+ let lq=null,done=0;
+ const fin=()=>{if(done)return;done=1;S.anim=null;S.spin=0;S.rot=rotEnd;S.ba=rotEnd+cen;S.stuck=cen;S.br=.63;S.hl=ci;fx('stop');
+  const r=s.s.querySelector('#rres');if(r){r.textContent='Выпало '+(ci+1)+' · '+col;r.style.background=COL[col]}
+  setTimeout(res,wn?1500:3200)};
+ S.anim=now=>{const t=Math.min(1,(now-t0)/DUR),ew=1-Math.pow(1-t,3),eb=1-Math.pow(1-t,4);S.rot=rot0+(rotEnd-rot0)*ew;
+  const u=Math.max(0,Math.min(1,(t-.5)/.32)),sm=u*u*(3-2*u);let r=.81-.18*sm;if(t>.82){const v=(t-.82)/.18;r=.63+.05*Math.abs(Math.sin(v*Math.PI*3.2))*(1-v)}
+  S.br=r;S.ba=t<.9?phiEnd+(1-eb)*K:S.rot+cen;
+  const q=Math.floor((S.ba-S.rot)/a);if(lq!==null&&q!==lq&&t>.5)fx('tick',1);lq=q;if(t>=1)fin()};
+ setTimeout(fin,DUR+600)})}
+function resetSector(){if(!ST||!ST.R)return;ST.R.ball=0;ST.R.stuck=null;ST.R.hl=-1;const r=ST.s.querySelector('#rres');if(r){r.textContent='Делайте ставки!';r.style.background=''}}
+/* --- сейф --- */
+function vaultGuess(u,t){if(!ST||ST.k!=='vault')return;const sf=ST.s.querySelector('#sf'),cells=sf.querySelectorAll('.dc');let nw=0;
+ for(let i=0;i<t.length;i++)if(t[i]===F.code[i]&&!F.rev[i]){F.rev[i]=1;nw++;cells[i].textContent=t[i];cells[i].classList.add('ok','pop')}
+ sf.querySelector('.sf-last').innerHTML='<b>'+esc(u)+'</b>'+[...t].map((ch,i)=>'<i class="'+(ch===F.code[i]?'g':'')+'">'+ch+'</i>').join('');
+ sf.classList.remove('sfshake');
+ if(nw)fx('tick',3);else{void sf.offsetWidth;sf.classList.add('sfshake');if(Date.now()-(F.es||0)>400){F.es=Date.now();fx('error')}}
+ setTimeout(()=>sf.querySelectorAll('.pop').forEach(d=>d.classList.remove('pop')),700)}
+async function fxVault(f,u){const sf=ST.s.querySelector('#sf');
+ sf.querySelectorAll('.dc').forEach((d,i)=>{d.textContent=f.code[i];d.classList.add('ok')});
+ sf.querySelector('.sf-nick').textContent=u;sf.classList.add('unlock');fx('tick',4);await zz(1300);
+ sf.classList.add('open');fx('open');await zz(2200);fx('accept')}
+async function finale(f,u){if(!ST)return;ST.o.hidden=false;
+ if(f.k==='vault')await fxVault(f,u);
+ if(f.k==='sector'){const w=ST.s.querySelector('#fxw'),cs=ST.s.querySelector('.rcs');if(cs)cs.hidden=true;if(w){w.innerHTML='🏆 <b>'+esc(u)+'</b>';w.hidden=false}fx('accept')}}
+function stageUpdate(){if(!ST||!F)return;const k=F.k,m=ST.o.querySelector('#fxm');
+ if(m)m.textContent=k==='vault'?'Угадано цифр: '+Object.keys(F.rev).length+' из '+F.cfg.len+(F.done?'':' · участников: '+F.users.size):(F.done?'Игра завершена':F.busy?'Определяем результат…':'Раунд '+F.round+'/'+F.cfg.rounds+' · осталось '+F.left+' с · голосов: '+Object.keys(F.votes).length+(F.surv?' · в игре: '+F.surv.size:''));
+ const cnt={};Object.values(F.votes).forEach(v=>cnt[v]=(cnt[v]||0)+1);
+ if(k==='cases')ST.tw.querySelectorAll('.bx').forEach(b=>{const v=cnt[b.dataset.n]||0,e=b.querySelector('.bx-vc');e.textContent=v;e.style.opacity=v?1:0});
+ if(k==='sector')ST.s.querySelectorAll('.rch').forEach(c=>{c.querySelector('b').textContent=cnt[c.dataset.c]||0})}
+/* ---------- панель управления ---------- */
+function paint(){const r=$('funRun');if(!F){stageStop();r.innerHTML='';r.dataset.sid='';return}
+ const m=M[F.k];
+ if(r.dataset.sid!=F.sid){r.dataset.sid=F.sid;
+  r.innerHTML='<div class="frun"><div class="fh"><b>'+m.n+'</b><span id="fhs"></span><button id="fxopen">Показать экран</button><button id="funStop"></button></div><div class="fmeta" id="fmeta"></div><div id="fwinb"></div><div class="flog" id="flog"></div></div>';
+  $('funStop').onclick=stopF;$('fxopen').onclick=()=>{if(ST)ST.o.hidden=false};stageInit()}
+ const ch=F.k!=='vault';
+ $('fhs').textContent=F.done?'завершено':'идёт';$('funStop').textContent=F.done?'Закрыть':'Остановить';
+ $('fmeta').innerHTML=ch&&!F.done?(F.busy?'Определяем результат…':'Раунд '+F.round+'/'+F.cfg.rounds+' · осталось <b>'+F.left+'</b> с · голосов: <b>'+Object.keys(F.votes).length+'</b>'+(F.surv?' · в игре: '+F.surv.size:'')):'Участников: <b>'+F.users.size+'</b>';
+ $('fwinb').innerHTML=F.win?'<div class="fwin">🏆 Победитель: <b>'+esc(F.win)+'</b></div>':'';
+ $('flog').innerHTML=F.log.map(x=>'<div>'+esc(x)+'</div>').join('');stageUpdate()}
 function stopF(){if(F&&F.t)clearInterval(F.t);F=null;paint()}
-async function win(u){if(!F||F.done)return;const f=F;f.done=1;if(f.t)clearInterval(f.t);f.win=u;L('Победитель: '+u);say2('🏆 Побеждает '+u+'! Приз: '+prize());
-addRound({t:Date.now(),name:'Интерактив: '+M[f.k].n,prize:$('prize').value||'',people:f.users.size,winners:[u],method:'Интерактив · '+M[f.k].n});
-try{const pool=[...f.users].map(n=>({name:n}));if(pool.length)await spin('roulette',pool,{name:u})}catch(e){}try{confetti()}catch(e){}paint()}
+async function win(u){if(!F||F.done)return;const f=F;f.done=1;if(f.t)clearInterval(f.t);paint();
+ try{await finale(f,u)}catch(e){}
+ f.win=u;L('Победитель: '+u);say2('🏆 Побеждает '+u+'! Приз: '+prize());
+ addRound({t:Date.now(),name:'Интерактив: '+M[f.k].n,prize:$('prize').value||'',people:f.users.size,winners:[u],method:'Интерактив · '+M[f.k].n});
+ try{confetti()}catch(e){}paint()}
 function start(k,box){const cfg={};box.querySelectorAll('[data-c]').forEach(i=>cfg[i.dataset.c]=i.value);
-['n','max','rounds','sec','len'].forEach(x=>{if(cfg[x]!==undefined)cfg[x]=Math.max(1,parseInt(cfg[x])||1)});if(cfg.word)cfg.word=cfg.word.trim().toLowerCase();
-if(F&&F.t)clearInterval(F.t);F={k,cfg,users:new Set(),log:[],votes:{},round:1,left:cfg.sec||0};
-if(k==='guess'){F.secret=1+Math.floor(Math.random()*cfg.max);say2('🔢 Угадай число от 1 до '+cfg.max+'! Пиши число в чат. Приз: '+prize())}
-if(k==='race')say2('🏁 Гонка! Кто первым напишет «'+cfg.word+'» '+cfg.n+' раз в одном сообщении, тот победил. Приз: '+prize());
-if(k==='vault'){F.code=Array.from({length:cfg.len},()=>Math.floor(Math.random()*10)).join('');say2('🔐 Сейф закрыт! Код из '+cfg.len+' цифр. Пиши варианты, я подскажу сколько угадано. Приз: '+prize())}
-if(['cases','rps','sector'].includes(k)){say2(({cases:'📦 Выбери правильный кейс: пиши !кейс 1 … !кейс 5.',rps:'✊ Камень, ножницы или бумага? Пиши свой ход.',sector:'🎡 Угадай цвет сектора: красный, синий, зелёный или жёлтый.'})[k]+' Раунд 1, '+cfg.sec+' с. Приз: '+prize());F.t=setInterval(tickF,1000)}
-L('Запущено');paint()}
-function tickF(){if(!F||F.done)return;F.left--;if(F.left<=0)resolve();paint()}
-function resolve(){const k=F.k;let c,txt;
-if(k==='cases'){c=String(1+Math.floor(Math.random()*5));F.hit=c;txt='Приз был в кейсе №'+c}
-if(k==='rps'){F.bot=R(Object.keys(beat));c=beat[F.bot];txt='Бот выбрал '+F.bot+', побеждает «'+c+'»'}
-if(k==='sector'){c=R(COLS);const i=COLS.indexOf(c);F.rot=360*4-(i*90+45);txt='Рулетка остановилась на секторе «'+c+'»'}
-const ok=Object.keys(F.votes).filter(u=>F.votes[u]===c&&(!F.surv||F.surv.has(u)));
-say2(txt+'. Угадали: '+ok.length);L(txt+' · угадали: '+ok.length);
-if(!ok.length){say2('Никто не угадал, раунд повторяется');F.votes={};F.left=F.cfg.sec;return}
-if(ok.length===1||F.round>=F.cfg.rounds){win(R(ok));return}
-F.surv=new Set(ok);F.round++;F.votes={};F.left=F.cfg.sec;say2('Дальше проходят: '+ok.length+'. Раунд '+F.round+', '+F.left+' с')}
+ ['cnt','rounds','sec','len'].forEach(x=>{if(cfg[x]!==undefined)cfg[x]=Math.max(1,parseInt(cfg[x])||1)});
+ if(cfg.cnt!==undefined)cfg.cnt=Math.min(12,Math.max(2,cfg.cnt));if(cfg.len!==undefined)cfg.len=Math.min(10,cfg.len);
+ if(F&&F.t)clearInterval(F.t);F={k,cfg,sid:++SID,users:new Set(),log:[],votes:{},round:1,left:cfg.sec||0,rev:{}};
+ if(k==='vault'){F.code=Array.from({length:cfg.len},()=>Math.floor(Math.random()*10)).join('');say2('🔐 Сейф закрыт! Код из '+cfg.len+' цифр. Пиши варианты, я подскажу сколько угадано. Приз: '+prize())}
+ if(k==='cases'||k==='sector'){say2(({cases:'📦 Выбери правильную шкатулку: пиши !кейс 1 … !кейс '+cfg.cnt+'.',sector:'🎡 Угадай цвет сектора: красный, синий, зелёный или жёлтый.'})[k]+' Раунд 1, '+cfg.sec+' с. Приз: '+prize());F.t=setInterval(tickF,1000)}
+ L('Запущено');paint()}
+function tickF(){if(!F||F.done||F.busy)return;F.left--;if(F.left<=0)resolve();paint()}
+async function resolve(){const f=F,k=f.k;f.busy=1;let c,txt,ci=0;
+ if(k==='cases'){ci=Math.floor(Math.random()*f.cfg.cnt);c=String(ci+1);f.hit=c;txt='Приз был в шкатулке №'+c}
+ if(k==='sector'){ci=Math.floor(Math.random()*24);c=COLS[ci%4];txt='Рулетка остановилась на '+(ci+1)+', сектор «'+c+'»'}
+ const ok=Object.keys(f.votes).filter(u=>f.votes[u]===c&&(!f.surv||f.surv.has(u)));
+ const final=ok.length>0&&(ok.length===1||f.round>=f.cfg.rounds),wn=final?R(ok):null;
+ paint();if(final&&ST)ST.o.hidden=false;
+ try{if(k==='cases')await fxCases(ci,ok,wn);if(k==='sector')await fxSector(ci,ok,wn)}catch(e){}
+ if(F!==f)return;
+ say2(txt+'. Угадали: '+ok.length);L(txt+' · угадали: '+ok.length);
+ const back=()=>{if(k==='cases')resetCases();if(k==='sector')resetSector()};
+ if(!ok.length){say2('Никто не угадал, раунд повторяется');f.votes={};f.left=f.cfg.sec;f.busy=0;back();paint();return}
+ if(final){win(wn);return}
+ f.surv=new Set(ok);f.round++;f.votes={};f.left=f.cfg.sec;f.busy=0;back();say2('Дальше проходят: '+ok.length+'. Раунд '+f.round+', '+f.left+' с');paint()}
 function funMsg(u,t){if(!F||F.done)return;t=String(t||'').trim().toLowerCase().replace(/ё/g,'е').replace(/\s+/g,' ');if(!t)return;F.users.add(u);const k=F.k;
-if(k==='race'){const w=t.split(' ');if(w.length===F.cfg.n&&w.every(x=>x===F.cfg.word.replace(/ё/g,'е')))win(u)}
-else if(k==='guess'&&/^\d{1,7}$/.test(t)){const n=+t;if(n===F.secret)win(u);else if(Date.now()-(F.last||0)>1500){F.last=Date.now();say2(u+': '+(n<F.secret?'больше':'меньше'))}}
-else if(k==='vault'&&/^\d+$/.test(t)&&t.length===F.cfg.len){if(t===F.code){win(u);return}let b=0;const cs={},ts={};for(let i=0;i<t.length;i++){if(t[i]===F.code[i])b++;cs[F.code[i]]=(cs[F.code[i]]||0)+1}let h=0;for(const d of t){if(cs[d]>0){h++;cs[d]--}}
-if(Date.now()-((F.lu||{})[u]||0)>3000){(F.lu=F.lu||{})[u]=Date.now();say2(u+': угадано цифр '+h+', на своих местах '+b);L(u+' '+t+' → '+h+'/'+b)}}
-else if(['cases','rps','sector'].includes(k)&&!F.votes[u]&&(!F.surv||F.surv.has(u))){let c=null,m;
-if(k==='cases'&&(m=t.match(/^!?кейс ?([1-5])$/)))c=m[1];if(k==='rps'&&beat[t])c=t;if(k==='sector'&&COL[t==='зеленый'?'зелёный':t==='желтый'?'жёлтый':t])c=(t==='зеленый'?'зелёный':t==='желтый'?'жёлтый':t);if(c){F.votes[u]=c;paint()}}}
+ if(k==='vault'&&/^\d+$/.test(t)&&t.length===F.cfg.len){if(t===F.code){win(u);return}
+  let b=0;const cs={};for(let i=0;i<t.length;i++){if(t[i]===F.code[i])b++;cs[F.code[i]]=(cs[F.code[i]]||0)+1}
+  let h=0;for(const d of t){if(cs[d]>0){h++;cs[d]--}}
+  vaultGuess(u,t);paint();
+  if(Date.now()-((F.lu||{})[u]||0)>3000){(F.lu=F.lu||{})[u]=Date.now();say2(u+': угадано цифр '+h+', на своих местах '+b);L(u+' '+t+' → '+h+'/'+b)}}
+ else if((k==='cases'||k==='sector')&&!F.busy&&!F.votes[u]&&(!F.surv||F.surv.has(u))){let c=null,m;
+  if(k==='cases'&&(m=t.match(/^!?кейс ?(\d+)$/))&&+m[1]>=1&&+m[1]<=F.cfg.cnt)c=String(+m[1]);
+  if(k==='sector'){const tt=t==='зеленый'?'зелёный':t==='желтый'?'жёлтый':t;if(COL[tt])c=tt}
+  if(c){F.votes[u]=c;paint()}}}
 const _oc=onChat;onChat=function(u,t){try{funMsg(u,t)}catch(e){}return _oc.apply(this,arguments)};
 $('funGrid').onclick=e=>{const b=e.target.closest('button'),box=e.target.closest('.fc2');if(b&&box)start(box.dataset.k,box)};
 })();
